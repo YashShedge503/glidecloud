@@ -4,10 +4,10 @@ from pydantic import BaseModel
 from app.rag import get_rag_chain
 import os
 
-# 1. Initialize FastAPI
+# Initialize FastAPI
 app = FastAPI()
 
-# 2. Allow CORS (So your local HTML file can talk to this server)
+# Allow CORS (our local HTML file can cnnect to this server)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # Allows all origins
@@ -16,20 +16,20 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# 3. Define the Request Structure
+# define the Request Structure
 class QueryRequest(BaseModel):
     query: str
 
-# 4. Initialize Chain (Global variable to load once)
+# initialize Chain (Global variable to load once)
 rag_chain = get_rag_chain()
 
 @app.post("/search")
 async def search(request: QueryRequest):
     try:
-        # Run the RAG pipeline
+        # run the RAG pipeline
         response = rag_chain.invoke({"input": request.query})
         
-        # Format the context for the frontend
+        # format the context for the frontend
         sources = []
         if "context" in response:
             for doc in response["context"]:

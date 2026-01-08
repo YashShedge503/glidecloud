@@ -5,7 +5,7 @@ import os
 def load_and_split_pdfs(pdf_dir):
     documents = []
     
-    # Check if directory exists
+    # checking if directory exists
     if not os.path.exists(pdf_dir):
         print(f"Error: Directory '{pdf_dir}' not found.")
         return []
@@ -18,7 +18,7 @@ def load_and_split_pdfs(pdf_dir):
             loader = PyPDFLoader(file_path)
             documents.extend(loader.load())
 
-    # Create splitter once
+    # create splitter once
     splitter = RecursiveCharacterTextSplitter(
         chunk_size=800,
         chunk_overlap=150

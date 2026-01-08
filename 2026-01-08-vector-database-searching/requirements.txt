@@ -1,3 +1,12 @@
+langchain
+langchain-community
+langchain-ollama
+langchain-chroma
+chromadb
+pypdf
+python-dotenv
+tqdm
 fastapi
 uvicorn
 pydantic
+pytest

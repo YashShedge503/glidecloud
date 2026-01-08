@@ -58,35 +58,38 @@ def run_chat():
             start_time = time.time()
             
             # EXECUTE CHAIN 
-            response = qa_chain.invoke({"input": query})
+            response = qa_chain.invoke(query)
+
             
             end_time = time.time()
 
             # DISPLAY ANSWER
             # the key for the answer is now 'answer'
             print("\n" + "-"*20 + " 🤖 ANSWER " + "-"*20)
-            print(response['answer'])
+            print(response.content)
             print("-" * 50)
+            print(f"Answered in {end_time - start_time:.2f}s")
+            print("="*50 + "\n")
 
             # --- DISPLAY RETRIEVED CONTEXT ---
             # The key for documents is now 'context'
-            print(f"\n RELEVANT CONTEXT (Retrieved in {end_time - start_time:.2f}s):")
-            source_docs = response.get('context', [])
+            # print(f"\n RELEVANT CONTEXT (Retrieved in {end_time - start_time:.2f}s):")
+            # source_docs = response.get('context', [])
             
-            if source_docs:
-                for i, doc in enumerate(source_docs, 1):
-                    source = doc.metadata.get('source', 'Unknown File')
-                    page = doc.metadata.get('page', 'N/A')
+            # if source_docs:
+            #     for i, doc in enumerate(source_docs, 1):
+            #         source = doc.metadata.get('source', 'Unknown File')
+            #         page = doc.metadata.get('page', 'N/A')
                     
-                    # Clean up content for display (remove excessive newlines)
-                    content_preview = doc.page_content.replace('\n', ' ')[:200] + "..."
+            #         # Clean up content for display (remove excessive newlines)
+            #         content_preview = doc.page_content.replace('\n', ' ')[:200] + "..."
                     
-                    print(f"   [{i}] File: {os.path.basename(source)} | Page: {page}")
-                    print(f"       Preview: \"{content_preview}\"\n")
-            else:
-                print("   No relevant context found.")
+            #         print(f"   [{i}] File: {os.path.basename(source)} | Page: {page}")
+            #         print(f"       Preview: \"{content_preview}\"\n")
+            # else:
+            #     print("   No relevant context found.")
             
-            print("="*50 + "\n")
+            # print("="*50 + "\n")
 
         except KeyboardInterrupt:
             print("\nGoodbye! ")

@@ -189,3 +189,54 @@
 2026-01-14 23:22:33 [rds-postgres-primary] CRITICAL FATAL: remaining connection slots are reserved for non-replication superuser connections
 2026-01-14 23:22:36 [app-server] INFO Cache refreshed
 2026-01-14 23:22:39 [app-server] INFO User login successful
+2026-01-14 23:22:42 [app-server] INFO Payment processed
+2026-01-14 23:22:45 [app-server] INFO User login successful
+2026-01-14 23:22:48 [app-server] INFO User login successful
+2026-01-14 23:22:51 [app-server] INFO Health check passed
+2026-01-14 23:22:54 [app-server] INFO Health check passed
+2026-01-14 23:22:57 [app-server] INFO User login successful
+2026-01-14 23:23:00 [app-server] INFO Cache refreshed
+2026-01-14 23:23:03 [app-server] INFO Payment processed
+2026-01-14 23:23:06 [aws-lambda-payment] ERROR Runtime.ImportModuleError: Unable to import module 'app': No module named 'requests'
+2026-01-14 23:23:09 [app-server] INFO Health check passed
+2026-01-14 23:23:12 [app-server] INFO Health check passed
+2026-01-14 23:23:15 [k8s-ingress-nginx] WARNING 504 Gateway Time-out - Upstream server not responding
+2026-01-14 23:23:18 [app-server] INFO Health check passed
+2026-01-14 23:23:21 [app-server] INFO User login successful
+2026-01-14 23:23:24 [k8s-ingress-nginx] WARNING 504 Gateway Time-out - Upstream server not responding
+2026-01-14 23:23:27 [app-server] INFO User login successful
+2026-01-14 23:23:30 [app-server] INFO Health check passed
+2026-01-14 23:23:33 [aws-lambda-payment] ERROR Runtime.ImportModuleError: Unable to import module 'app': No module named 'requests'
+2026-01-14 23:23:36 [auth-service-node] ERROR TokenExpiredError: jwt expired at 2024-01-09T10:00:00.000Z
+2026-01-14 23:23:39 [app-server] INFO Health check passed
+2026-01-14 23:23:42 [rds-postgres-primary] CRITICAL FATAL: remaining connection slots are reserved for non-replication superuser connections
+2026-01-14 23:23:45 [app-server] INFO User login successful
+2026-01-14 23:23:48 [app-server] INFO Payment processed
+2026-01-14 23:23:51 [app-server] INFO Health check passed
+2026-01-14 23:23:54 [rds-postgres-primary] CRITICAL FATAL: remaining connection slots are reserved for non-replication superuser connections
+2026-01-14 23:23:57 [app-server] INFO Payment processed
+2026-01-14 23:24:00 [rds-postgres-primary] CRITICAL FATAL: remaining connection slots are reserved for non-replication superuser connections
+2026-01-14 23:24:03 [aws-lambda-payment] ERROR Runtime.ImportModuleError: Unable to import module 'app': No module named 'requests'
+2026-01-14 23:24:06 [app-server] INFO Health check passed
+2026-01-14 23:24:09 [app-server] INFO Health check passed
+2026-01-14 23:24:12 [k8s-ingress-nginx] WARNING 504 Gateway Time-out - Upstream server not responding
+2026-01-14 23:24:15 [app-server] INFO Health check passed
+2026-01-14 23:24:18 [app-server] INFO Cache refreshed
+2026-01-14 23:24:21 [app-server] INFO Health check passed
+2026-01-14 23:24:24 [app-server] INFO Health check passed
+2026-01-14 23:24:27 [app-server] INFO Cache refreshed
+2026-01-14 23:24:30 [app-server] INFO User login successful
+2026-01-14 23:24:33 [app-server] INFO Health check passed
+2026-01-14 23:24:36 [app-server] INFO Cache refreshed
+2026-01-14 23:24:39 [k8s-ingress-nginx] WARNING 504 Gateway Time-out - Upstream server not responding
+2026-01-14 23:24:42 [rds-postgres-primary] CRITICAL FATAL: remaining connection slots are reserved for non-replication superuser connections
+2026-01-14 23:24:45 [k8s-ingress-nginx] WARNING 504 Gateway Time-out - Upstream server not responding
+2026-01-14 23:24:48 [aws-lambda-payment] ERROR Runtime.ImportModuleError: Unable to import module 'app': No module named 'requests'
+2026-01-14 23:24:51 [app-server] INFO User login successful
+2026-01-14 23:24:54 [app-server] INFO Payment processed
+2026-01-14 23:24:57 [app-server] INFO Payment processed
+2026-01-14 23:25:00 [app-server] INFO Cache refreshed
+2026-01-14 23:25:03 [aws-lambda-payment] ERROR Runtime.ImportModuleError: Unable to import module 'app': No module named 'requests'
+2026-01-14 23:25:06 [app-server] INFO Cache refreshed
+2026-01-14 23:25:09 [aws-lambda-payment] ERROR Runtime.ImportModuleError: Unable to import module 'app': No module named 'requests'
+2026-01-14 23:25:12 [aws-lambda-payment] ERROR Runtime.ImportModuleError: Unable to import module 'app': No module named 'requests'

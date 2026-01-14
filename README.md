@@ -120,6 +120,7 @@ Result: A compliance-safe, production-ready fix
 
 ### Step 1: Clone the Repository
 git clone https://github.com/YashShedge503/glidecloud.git
+
 cd glidecloud/Genai_capstone_project
 
 ---

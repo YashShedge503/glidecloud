@@ -8,5 +8,5 @@ class Config:
     LLM_MODEL = os.getenv("LLM_MODEL", "llama3")
     OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
     
-    # Simulating Cloud Credentials (fake for now)
+    # Simulating Cloud Credentials 
     AWS_REGION = "us-east-1"

@@ -20,7 +20,7 @@ class ErrorResolver:
         )
         self.parser = JsonOutputParser(pydantic_object=ResolutionSchema)
 
-        # UPDATED PROMPT: Injects 'context' from RAG
+        # PROMPT: Injects 'context' from RAG
         self.prompt = ChatPromptTemplate.from_template(
             """
             You are a Senior SRE at ACME Corp.
@@ -44,11 +44,11 @@ class ErrorResolver:
         self.chain = self.prompt | self.llm | self.parser
 
     def resolve(self, log_entry):
-        # 1. Retrieve Context
+        # retrieve Context
         print(f"🔍 Searching Knowledge Base for: {log_entry.service_name}")
         context_data = rag.retrieve(log_entry.message)
         
-        # 2. Generate Answer
+        # generate Answer
         return self.chain.invoke({
             "context": context_data,
             "service": log_entry.service_name,

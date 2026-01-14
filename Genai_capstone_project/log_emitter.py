@@ -3,10 +3,10 @@ import random
 import logging
 from datetime import datetime
 
-# The file where logs will be written
+# file where logs will be written
 LOG_FILE = "real_time_logs.txt"
 
-# Setup logging
+# setup logging
 logging.basicConfig(
     filename=LOG_FILE,
     level=logging.INFO,
@@ -14,7 +14,7 @@ logging.basicConfig(
     datefmt='%Y-%m-%d %H:%M:%S'
 )
 
-# 1. THE "MENU" OF ERRORS (Pre-defined scenarios that match our RAG manual)
+# 1. THE MENU OF ERRORS (Pre-defined scenarios that match our RAG manual)
 ERROR_SCENARIOS = [
     ("auth-service-node", "ERROR", "TokenExpiredError: jwt expired at 2024-01-09T10:00:00.000Z"),
     ("rds-postgres-primary", "CRITICAL", "FATAL: remaining connection slots are reserved for non-replication superuser connections"),

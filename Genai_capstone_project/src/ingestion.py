@@ -41,7 +41,7 @@ def fetch_cloud_logs(db: Session, count=3):
     for _ in range(count):
         scenario = random.choice(ERROR_SCENARIOS)
         
-        # Check if we already have this fake log to avoid duplicates in demo
+        # check if we already have this fake log to avoid duplicates 
         unique_id = f"aws-log-{uuid.uuid4().hex[:8]}"
         
         log_entry = LogRecord(

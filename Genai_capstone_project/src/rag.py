@@ -13,17 +13,17 @@ MANUAL_PATH = os.path.join(BASE_DIR, "knowledge_base", "troubleshooting_manual.t
 class RagEngine:
     def __init__(self):
         print("⚙️ Initializing RAG Engine...")
-        # 1. Setup Embeddings (Small, fast model)
+        # Setup Embeddings (Small, fast model)
         self.embedding_function = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
         
-        # 2. Check if DB exists. If not, build it.
+        # Check if DB exists. If not, build it.
         if not os.path.exists(DB_PATH):
             print(f"⚡ Vector DB not found at {DB_PATH}. Building from manual...")
             self.build_vector_db()
         else:
             print("✅ Vector DB loaded from disk.")
             
-        # 3. Load DB connection
+        # Load DB connection
         self.vector_db = Chroma(persist_directory=DB_PATH, embedding_function=self.embedding_function)
 
     def build_vector_db(self):

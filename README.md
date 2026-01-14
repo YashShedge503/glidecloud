@@ -1,42 +1,70 @@
-# Capstone project 
-# 🛡️ LogOps AI: Automated DevOps Error Resolver
+# Capstone Project
+# 🛡️ LogOps AI: Real-Time DevOps Error Resolver
 
-LogOps AI is an intelligent Site Reliability Engineering (SRE) tool designed to automate the detection, analysis, and resolution of cloud infrastructure errors.
+LogOps AI is an intelligent Site Reliability Engineering (SRE) tool designed to automate the detection, analysis, and resolution of live cloud infrastructure errors.
 
-Unlike standard log viewers, LogOps AI uses a Retrieval-Augmented Generation (RAG) pipeline to consult an internal Knowledge Base (SOPs) before prescribing a fix. It acts as a Level-1 AI Engineer that not only explains why a server failed but also generates the exact CLI command or SQL query to fix it, strictly adhering to company policies.
+Unlike standard log viewers, LogOps AI uses a Retrieval-Augmented Generation (RAG) pipeline to consult an internal Knowledge Base (SOPs) before prescribing a fix. It acts as a Level-1 AI Engineer that watches a live log stream, detects critical failures in real-time, and generates precise CLI commands or SQL queries to fix them—strictly adhering to company policies.
 
 ---
 
 ## 🏗️ System Architecture
 
-The system follows a Modular Monolith architecture designed for scalability and maintainability.
+The system follows a Real-Time Producer-Consumer architecture designed to mimic professional DevOps monitoring environments (like Splunk or Datadog).
 
-### 🔁 Workflow (Data Pipeline)
+### 1️⃣ The Producer (Log Simulation)
+Script: log_emitter.py
 
-1. Ingestion Layer (src/ingestion.py)
-- Simulates a real-time stream of CloudWatch / Stackdriver logs
-- Normalizes raw JSON logs into structured records
-- Tech: Python, Faker
+- Acts as a production server cluster
+- Generates a continuous stream of logs (INFO, ERROR, CRITICAL)
+- Writes logs to a shared file (real_time_logs.txt) every few seconds
 
-2. Persistence Layer (src/database.py)
-- Stores incoming logs and their resolution status
-- Ensures data integrity using a relational database
-- Tech: SQLite, SQLAlchemy (ORM)
+Tech: Python, Logging Module
 
-3. The Brain: RAG Engine (src/rag.py)
-- Converts the internal troubleshooting manual into vector embeddings
-- Stores embeddings for semantic search
-- Tech: ChromaDB, HuggingFace Embeddings
+---
 
-4. Resolution Agent (src/llm.py)
-- Retrieves relevant SOPs from the RAG engine
-- Prompts the LLM with Error Log + Company Policy
-- Outputs structured JSON (Root Cause, Fix Steps, Code Snippet)
-- Tech: LangChain, Ollama (Llama 3)
+### 2️⃣ The Consumer (Ingestion Layer)
+Script: src/ingestion.py
 
-5. Frontend Interface (main.py)
-- Interactive dashboard for DevOps engineers
-- Tech: Streamlit
+- Tails the log file in real-time
+- Filters out noisy INFO logs
+- Captures only ERROR and CRITICAL events
+- Normalizes logs into structured database records
+
+Tech: Python File I/O, Regex
+
+---
+
+### 3️⃣ The Brain (RAG Engine)
+Script: src/rag.py
+
+- Converts internal troubleshooting SOPs into vector embeddings
+- Enables semantic policy search
+
+Tech: ChromaDB, HuggingFace Embeddings
+
+---
+
+### 4️⃣ The Resolver (AI Agent)
+Script: src/llm.py
+
+- Retrieves the exact SOP for the detected error
+- Prompts the LLM with:
+  - Error log
+  - Internal policy
+  - Safety constraints
+- Generates a compliant, executable fix
+
+Tech: LangChain, Ollama (Llama 3)
+
+---
+
+### 5️⃣ The Dashboard (Frontend)
+Script: main.py
+
+- Interactive monitoring dashboard for SREs
+- Displays live alerts and supports auto-resolution
+
+Tech: Streamlit
 
 ---
 
@@ -44,32 +72,35 @@ The system follows a Modular Monolith architecture designed for scalability and 
 
 This project implements True RAG to ensure the AI follows internal company rules instead of hallucinating generic fixes.
 
-- Knowledge Base
-  - knowledge_base/troubleshooting_manual.txt
-  - Contains confidential SOPs
-  - Example: Do not restart the payment service during business hours
+### Knowledge Base
+- knowledge_base/troubleshooting_manual.txt
+- Contains confidential SOPs  
+- Example: Do not restart the payment service during business hours
 
-- Vectorization
-  - SOPs are chunked and embedded using all-MiniLM-L6-v2
+### Vectorization
+- SOPs are chunked and embedded using all-MiniLM-L6-v2
 
-- Context Retrieval
-  - ChromaDB fetches only the most relevant policy
+### Context Retrieval
+- When an error occurs (e.g., Payment Timeout)
+- ChromaDB retrieves the exact policy for that service
 
-- Augmented Prompting
-  - LLM receives:
-    - Error log
-    - Exact internal rule
-  - Ensures compliance-safe fixes
+### Augmented Prompting
+- LLM receives:
+  - Error Log
+  - Internal Policy
+  - Operational Constraints
+
+Result: A compliance-safe, production-ready fix
 
 ---
 
 ## 🚀 Features
 
-- Automated Log Ingestion
-- Intelligent Resolution with real CLI commands (kubectl, systemctl, npm, SQL)
-- Policy Compliance enforced via RAG
-- Audit Trail for all resolved incidents
-- Clean and interactive dashboard
+⚡ Real-Time Log Streaming  
+🔍 Intelligent Filtering (ERROR / CRITICAL only)  
+🤖 Auto-Resolution with real CLI commands (kubectl, systemctl, npm, SQL)  
+🔒 Policy Enforcement using RAG  
+📊 Live Interactive Dashboard  
 
 ---
 
@@ -77,24 +108,15 @@ This project implements True RAG to ensure the AI follows internal company rules
 
 - Language: Python 3.10+
 - Frontend: Streamlit
-- LLM: Ollama (Llama 3)
-- Framework: LangChain
-- Vector DB: ChromaDB
+- AI / LLM: Ollama (Llama 3)
+- Orchestration: LangChain
+- Vector Database: ChromaDB
 - Database: SQLite (SQLAlchemy)
 - Embeddings: HuggingFace (sentence-transformers)
 
 ---
 
 ## 📦 Installation & Setup
-
-### Prerequisites
-- Python 3.10+
-- Ollama installed and running (https://ollama.com)
-
-Pull the model:
-ollama run llama3
-
----
 
 ### Step 1: Clone the Repository
 git clone https://github.com/YashShedge503/glidecloud.git
@@ -118,31 +140,50 @@ pip install -r requirements.txt
 
 ---
 
-### Step 4: Run the Application
-Ensure Ollama is running, then start the dashboard:
+## 📸 Usage (How to Run the Demo)
+
+To demonstrate real-time behavior, use two terminal windows.
+
+---
+
+### Terminal 1: Start the Simulation Server
+Acts as the production environment generating live logs.
+
+python log_emitter.py
+
+Logs will be written every few seconds, including simulated failures.
+
+---
+
+### Terminal 2: Start the LogOps Dashboard
+Acts as the SRE monitoring system.
+
 streamlit run main.py
 
 ---
 
-## 📸 Usage
+## 🎬 Workflow Demo
 
-1. Fetch Logs
-- Click the Fetch Logs button to simulate cloud errors
+1. Watch Terminal 1 until a red ERROR or CRITICAL log appears  
+   (e.g., TokenExpiredError)
 
-2. Select an Error
-- Choose a Pending error from the dashboard
+2. Open the dashboard and click "Poll Log Stream"
 
-3. Generate Fix
-- Click Generate Fix
-- The AI retrieves SOPs, explains the root cause, and generates a copy-pasteable fix command
+3. The error instantly appears in the Pending list
+
+4. Select the error and click "Auto-Resolve"
+
+5. The AI:
+   - Explains the root cause
+   - Retrieves the correct SOP
+   - Generates the exact fix command
 
 ---
 
 ## ✅ Outcome
 
-LogOps AI behaves like a junior SRE on-call engineer by providing:
-- Fast root cause analysis
-- Policy-compliant fixes
-- Clear audit history
+LogOps AI demonstrates a production-ready approach to AI Ops by answering one critical question:
 
-Ideal for GenAI, RAG, SRE, and DevOps portfolios.
+How can we trust AI to fix our servers?
+
+Answer: By grounding every decision in verified internal policies using Retrieval-Augmented Generation.

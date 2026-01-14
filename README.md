@@ -1,3 +1,4 @@
+# Capstone project 
 # 🛡️ LogOps AI: Automated DevOps Error Resolver
 
 LogOps AI is an intelligent Site Reliability Engineering (SRE) tool designed to automate the detection, analysis, and resolution of cloud infrastructure errors.
